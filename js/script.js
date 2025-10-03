@@ -1,34 +1,49 @@
-function updateStats() {
-    const total = tasks.length;
-    const completed = tasks.filter(t => t.completed).length;
-    const pending = total - completed;
-    const progress = total === 0 ? 0 : Math.round((completed / total) * 100);
+const taskForm = document.getElementById("taskForm");
+const taskInput = document.getElementById("taskInput");
+const taskDate = document.getElementById("taskDate");
+const taskList = document.getElementById("taskList");
+const filterInput = document.getElementById("filterInput");
 
-    document.getElementById("totalTasks").textContent = total;
-    document.getElementById("completedTasks").textContent = completed;
-    document.getElementById("pendingTasks").textContent = pending;
-    document.getElementById("progress").textContent = progress + "%";
+// Event tambah tugas
+taskForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const taskText = taskInput.value.trim();
+    const taskDateValue = taskDate.value;
+
+if (taskText === "" || taskDateValue === "") {
+    alert("Isi tanggal dan tugas!");
+    return;
 }
 
-function renderTasks() {
-    taskList.innerHTML = "";
+const li = document.createElement("li");
+li.innerHTML = `
+    <span>${taskDateValue} - ${taskText}</span>
+    <button class="delete-btn">Hapus</button>`;
 
-    if (tasks.length === 0) {
-        taskList.innerHTML = `<tr><td colspan="4" class="empty">No tasks found</td></tr>`;
-    } else {
-        tasks.forEach((task, index) => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${task.text}</td>
-                <td>${task.date || "-"}</td>
-                <td>${task.completed ? "✅ Done" : "⏳ Pending"}</td>
-                <td>
-                    <button onclick="toggleTask(${index})">✔</button>
-                    <button onclick="deleteTask(${index})">❌</button>
-                </td>
-            `;
-        taskList.appendChild(row);
-        });
-    }
-    updateStats();
-}
+  // Event hapus
+li.querySelector(".delete-btn").addEventListener("click", function() {
+    li.remove();
+});
+
+taskList.appendChild(li);
+
+  // Reset form
+taskInput.value = "";
+taskDate.value = "";
+});
+
+// Event filter tugas
+filterInput.addEventListener("keyup", function() {
+    const filterValue = filterInput.value.toLowerCase();
+    const tasks = taskList.getElementsByTagName("li");
+
+    Array.from(tasks).forEach(function(task) {
+        const text = task.textContent.toLowerCase();
+        if (text.includes(filterValue)) {
+            task.style.display = "flex";
+        } else {
+            task.style.display = "none";
+        }
+    });
+});
