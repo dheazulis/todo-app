@@ -1,129 +1,152 @@
-/* Reset */
-* {
+/* 🌙 Dark Theme Modern Style */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0d1117; /* background gelap */
+    color: #e6e6e6;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
-
-body {
-    background-color: #0d1117;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #f5f5f5;
 }
 
 /* Container utama */
 .container {
-    background-color: #1e2530;
-    padding: 25px;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* Statistik cards */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: #161b22;
+    padding: 20px;
     border-radius: 12px;
-    width: 500px;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.4);
-}
-
-/* Judul */
-h1 {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 22px;
-    color: #dfe6ff;
 }
 
-/* Form tambah todo */
-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-form input[type="text"],
-form input[type="date"] {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background-color: #0d1117;
-    color: #f5f5f5;
+.stat-card h3 {
     font-size: 14px;
+    margin-bottom: 8px;
+    color: #aaa;
 }
 
-form input::placeholder {
-    color: #777;
+.stat-card .value {
+    font-size: 26px;
+    font-weight: 700;
 }
 
-form button {
-    padding: 10px 14px;
-    background-color: #6c63ff;
-    color: white;
-    border: none;
+.stat-total { color: #9b59b6; }
+.stat-completed { color: #2ecc71; }
+.stat-pending { color: #f1c40f; }
+.stat-progress { color: #3498db; }
+
+/* Input area */
+.input-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="date"] {
+    flex: 1;
+    padding: 12px;
     border-radius: 8px;
+    border: 2px solid #444;
+    background: #0d1117;
+    color: #eee;
+    outline: none;
+    transition: border 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus {
+    border-color: #9b59b6;
+    box-shadow: 0 0 6px #9b59b6;
+}
+
+.btn-add {
+    background: #e91e63;
+    border: none;
+    padding: 0 16px;
+    font-size: 22px;
+    border-radius: 50%;
     cursor: pointer;
+    color: white;
     transition: 0.3s;
 }
 
-form button:hover {
-    background-color: #7d78ff;
+.btn-add:hover {
+    background: #ff4081;
+    transform: scale(1.05);
 }
 
-/* Tombol delete all & filter */
+/* Tombol umum */
+button {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background: #ff6b6b;
+}
+
+/* Filter/Search area */
 .actions {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 15px;
 }
 
-.actions button {
-    padding: 8px 14px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 13px;
-}
-
-.filter-btn {
-    background-color: #2d3436;
-    color: #fff;
-}
-
-.delete-all {
-    background-color: #6c63ff;
-    color: #fff;
-}
-
-.delete-all:hover {
-    background-color: #7d78ff;
+.actions input {
+    flex: 1;
 }
 
 /* Table */
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #0d1117;
-    border-radius: 8px;
+    background: #161b22;
+    border-radius: 10px;
     overflow: hidden;
 }
 
-table thead {
-    background-color: #1a1f29;
-    text-align: left;
+thead {
+    background: #21262d;
+    color: #aaa;
 }
 
-table th, table td {
-    padding: 12px;
-    font-size: 14px;
-    color: #dcdcdc;
-}
-
-table tr:nth-child(even) {
-    background-color: #151a21;
-}
-
-/* Pesan jika kosong */
-.empty {
+th, td {
+    padding: 14px;
     text-align: center;
-    color: #6c63ff;
-    padding: 20px 0;
+    border-bottom: 1px solid #2c313a;
+}
+
+tbody tr:nth-child(even) {
+    background: #1c2229;
+}
+
+.status-done {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: #f1c40f;
+    font-weight: bold;
 }
