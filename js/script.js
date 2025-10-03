@@ -1,49 +1,73 @@
+// Ambil elemen DOM
 const taskForm = document.getElementById("taskForm");
 const taskInput = document.getElementById("taskInput");
-const taskDate = document.getElementById("taskDate");
+const dueDate = document.getElementById("dueDate");
 const taskList = document.getElementById("taskList");
-const filterInput = document.getElementById("filterInput");
+const deleteAllBtn = document.querySelector(".delete-all");
 
-// Event tambah tugas
-taskForm.addEventListener("submit", function(e) {
-    e.preventDefault();
+// Array untuk menyimpan tasks
+let tasks = [];
 
-    const taskText = taskInput.value.trim();
-    const taskDateValue = taskDate.value;
+// Fungsi render task ke tabel
+function renderTasks() {
+    taskList.innerHTML = "";
 
-if (taskText === "" || taskDateValue === "") {
-    alert("Isi tanggal dan tugas!");
-    return;
+    if (tasks.length === 0) {
+        taskList.innerHTML = `<tr><td colspan="4" class="empty">No task found</td></tr>`;
+        return;
+    }
+
+    tasks.forEach((task, index) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${task.text}</td>
+            <td>${task.date || "-"}</td>
+            <td>${task.completed ? "✅ Done" : "⏳ Pending"}</td>
+            <td>
+                <button onclick="toggleTask(${index})">✔</button>
+                <button onclick="deleteTask(${index})">❌</button>
+            </td>
+        `;
+
+        taskList.appendChild(row);
+    });
 }
 
-const li = document.createElement("li");
-li.innerHTML = `
-    <span>${taskDateValue} - ${taskText}</span>
-    <button class="delete-btn">Hapus</button>`;
+// Tambah task baru
+taskForm.addEventListener("submit", (e) => {
+    e .preventDefault();
 
-  // Event hapus
-li.querySelector(".delete-btn").addEventListener("click", function() {
-    li.remove();
+    const newTask = {
+        text: taskInput.value,
+        date: dueDate.value,
+        completed: false
+    };
+
+    tasks.push(newTask);
+    taskInput.value = "";
+    dueDate.value = "";
+
+    renderTasks();
 });
 
-taskList.appendChild(li);
+// Toggle selesai/belum
+function toggleTask(index) {
+    tasks[index].completed = !tasks[index].completed;
+    renderTasks();
+}
 
-  // Reset form
-taskInput.value = "";
-taskDate.value = "";
+// Hapus task tertentu
+function deleteTask(index) {
+    tasks.splice(index, 1);
+    renderTasks();
+}
+
+// Hapus semua task
+deleteAllBtn.addEventListener("click", () => {
+    tasks = [];
+    renderTasks();
 });
 
-// Event filter tugas
-filterInput.addEventListener("keyup", function() {
-    const filterValue = filterInput.value.toLowerCase();
-    const tasks = taskList.getElementsByTagName("li");
-
-    Array.from(tasks).forEach(function(task) {
-        const text = task.textContent.toLowerCase();
-        if (text.includes(filterValue)) {
-            task.style.display = "flex";
-        } else {
-            task.style.display = "none";
-        }
-    });
-});
+// Pertama kali render
+renderTasks();
