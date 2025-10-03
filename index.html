@@ -1,36 +1,47 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List Dhea ☕ | Produktif Setiap Hari</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js" defer></script>
 
+</head>
+<body>
 
-    <!-- Form tambah task -->
-    <form id="taskForm">
-        <input type="text" id="taskInput" placeholder="Add a todo . . ." required>
-        <input type="date" id="dueDate">
-        <button type="submit">+</button>
-    </form>
+    <div class="container">
+        <h1>Todo List</h1>
 
-    <!-- Tombol filter & hapus semua -->
-    <div class="actions">
-        <button class="filter-btn">FILTER</button>
-        <button class="delete-all">DELETE ALL</button>
+        <!-- Form tambah task -->
+        <form id="taskForm">
+            <input type="text" id="taskInput" placeholder="Add a todo . . ." required>
+            <input type="date" id="dueDate">
+            <button type="submit">+</button>
+        </form>
+
+        <!-- Tombol filter & hapus semua -->
+        <div class="actions">
+            <button class="filter-btn">FILTER</button>
+            <button class="delete-all">DELETE ALL</button>
+        </div>
+
+        <!-- Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>TASK</th>
+                    <th>DUE DATE</th>
+                    <th>STATUS</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody id="taskList">
+                <tr>
+                    <td colspan="4" class="empty">No task found</td>
+                </tr>   
+            </tbody>
+        </table>
     </div>
-
-    <!-- Table -->
-    <table>
-        <thead>
-            <tr>
-                <th>TASK</th>
-                <th>DUE DATE</th>
-                <th>STATUS</th>
-                <th>ACTIONS</th>
-            </tr>
-        </thead>
-        <tbody id="taskList">
-            <tr>
-                <td colspan="4" class="empty">No task found</td>
-            </tr>   
-        </tbody>
-    </table>
-</div>
+</body>
+</html>
