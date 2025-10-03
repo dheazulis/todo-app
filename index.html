@@ -1,33 +1,55 @@
-<div class="container">
-    <h1>Todo List</h1>
-    
-    <!-- Form tambah task -->
-    <form id="taskForm">
-        <input type="text" id="taskInput" placeholder="Add a todo . . ." required>
-        <input type="date" id="dueDate">
-        <button type="submit">+</button>
-    </form>
+<body>
+    <div class="container">
+        <h1>Todo List</h1>
 
-    <!-- Tombol filter & hapus semua -->
-    <div class="actions">
-        <button class="filter-btn">FILTER</button>
-        <button class="delete-all">DELETE ALL</button>
+        <!-- Statistik -->
+        <div class="stats">
+            <div class="card">
+                <h3>Total Tasks</h3>
+                <p id="totalTasks">0</p>
+            </div>
+        <div class="card">
+                <h3>Completed</h3>
+                <p id="completedTasks">0</>
+            </div>
+        <div class="card">
+                <h3>Pending</h3>
+                <p id="pendingTasks">0</p>
+            </div>
+        <div class="card">
+                <h3>Progress</h3>
+                <p id="progress">0%</p>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <form id="taskForm">
+            <input type="text" id="taskInput" placeholder="Add a todo..." required>
+            <input type="date" id="dueDate">
+            <button type="submit">+</button>
+        </form>
+
+        <!-- Filter dan Delete All -->
+        <div class="controls">
+            <button class="filter">Filter</button>
+            <button class="delete-all">Delete All</button>
+        </div>
+
+        <!-- Tabel -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="taskList">
+                <tr><td colspan="4" class="empty">No tasks found</td></tr>
+            </tbody>
+        </table>
     </div>
 
-    <!-- Table -->
-    <table>
-        <thead>
-            <tr>
-                <th>TASK</th>
-                <th>DUE DATE</th>
-                <th>STATUS</th>
-                <th>ACTIONS</th>
-            </tr>
-        </thead>
-        <tbody id="taskList">
-            <tr>
-                <td colspan="4" class="empty">No task found</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <script src="js/script.js"></script>
+</body>
